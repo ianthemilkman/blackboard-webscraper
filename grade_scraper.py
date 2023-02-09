@@ -37,13 +37,11 @@ def cookieAgree():
 
 def openCourse():
     wait = WebDriverWait(driver, 10)
-    course_select = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="_388_1termCourses_noterm"]/ul/li[1]/a')))
     course_row = driver.find_elements(By.XPATH, '//*[@id="_388_1termCourses_noterm"]/ul/li')
     for course in range(len(course_row)):
         next_course = wait.until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="_388_1termCourses_noterm"]/ul/li[{course + 1}]/a')))
         name = driver.find_element(By.XPATH, f'//*[@id="_388_1termCourses_noterm"]/ul/li[{course + 1}]/a')
         formatted_name = formatName(name.text)
-        #course_select.click()
         next_course.click()
         course_grade = getCourseGrade()
         print(f"'{formatted_name}' grade:", course_grade)
@@ -59,7 +57,7 @@ def getCourseGrade():
         grade = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[5]/div[3]/div/div/div/div/div[2]/div[3]/div[2]/div[1]/div[3]/span')))
         print("success.")
         return grade.text
-    except:
+    except Exception:
         return "Not found"
 
 def formatName(name):
