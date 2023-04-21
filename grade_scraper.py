@@ -20,6 +20,7 @@ path = Service("/usr/lib/chromium-browser/chromedriver")
 driver = webdriver.Chrome(service=path, options=options)
 driver.get("https://blackboard.gwu.edu/webapps/login/")
 
+load_dotenv()
 
 def loginPage():
     username = os.getenv("BB_USERNAME")
