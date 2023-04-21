@@ -1,3 +1,6 @@
+
+import os
+from dotenv import load_dotenv
 from time import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -19,12 +22,14 @@ driver.get("https://blackboard.gwu.edu/webapps/login/")
 
 
 def loginPage():
+    username = os.getenv("BB_USERNAME")
+    password = os.getenv("BB_PASSWORD")
     user_field = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/form/div[3]/ul/li[1]/input")
     pass_field = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/form/div[3]/ul/li[2]/input")
     login_btn = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/form/div[3]/ul/li[3]/input")
 
-    user_field.send_keys("ianmilko03@gwu.edu")
-    pass_field.send_keys("#Levelofobsession539")
+    user_field.send_keys(username)
+    pass_field.send_keys(password)
     login_btn.click()
     print("success.")
 
